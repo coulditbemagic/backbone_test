@@ -86,11 +86,52 @@ $(function () {
             var username = this.el.find(".js-username").val();
             var password = this.el.find(".js-password").val();
 
-            var find = Admins.checkUser(username, password); // Проверка имени пользователя
-            appState.set({ // Сохранение имени пользователя и состояния
-                "state": find ? "success" : "error",
-                "username": username
+            var serverMock = {
+              authorize: function (sendObject, success, error) {
+                // здесь должен быть ajax-запрос на проверку имени-пароля
+                if(Admins.checkUser(sendObject.username, sendObject.password)) {
+                  $.getJSON("access.txt", success);       
+                }
+                else {
+                  $.getJSON("error.txt", error);
+                }
+              }
+            };
+
+            serverMock.authorize({
+                'username':username,
+                'password':password
+            }, function (json) { // success-ответ на авторизацию
+                if (json && json.status === true && // соглашение с сервером, status = true
+                  json.data && json.data.token) {
+                    setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/");
+                    appState.set({ // Сохранение имени пользователя и состояния
+                        "state": "success",
+                        "username": username
+                    });
+                }
+                else {
+                  appState.set({
+                      "state": "error"
+                      "message": "Something's wrong..."
+                  });
+                }
+            }, function (json) { // error-ответ на авторизацию
+                if (json && json.status === false && // соглашение с сервером, status = false
+                  json.error && json.error.messages && json.error.messages.length) {
+                    appState.set({
+                        "state": "error",
+                        "message": json.error.messages[0]
+                    });
+                }
+                else {
+                    appState.set({
+                        "state": "error",
+                        "message": "Can't authorize. Unknown error..."
+                    });
+                }
             });
+
         },
 
         render: function () {
@@ -142,21 +183,9 @@ $(function () {
         else {
             if (state == "success") {
                 controller.navigate("!/" + 'content', false);
-                $.getJSON( "access.txt", function( json ) {
-                    if (json && json.status === true && // соглашение с сервером, status = true
-                      json.data && json.data.token) {
-                        setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/");
-                    }
-                });
             }
             else {
                 controller.navigate("!/" + state, false);
-                $.getJSON( "error.txt", function( json ) {
-                    if (json && json.status === false && // соглашение с сервером, status = false
-                      json.error && json.error.messages && json.error.messages.length) {
-                        alert(json.error.messages[0]);
-                    }
-                });
             }
         }
     });
