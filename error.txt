@@ -1,0 +1,13 @@
+                                                                     
+                                                                     
+                                                                     
+                                             
+{
+  "status": false,
+  "error": {
+    "reason": "ApiException",
+    "messages": [
+      "USER_NOT_FOUND"
+    ]
+  }
+}

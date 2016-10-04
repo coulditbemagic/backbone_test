@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+
+
+        <title></title>
+
+
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <!--<link type="text/css" rel="stylesheet" href="css/bootstrap-theme.css" />-->
+
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/underscore.js"></script>
+        <script type="text/javascript" src="js/backbone.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+
+    </head>
+    <body class="text-center">
+
+
+        <div class="page-header"></div>
+
+
+        <div id="block" class="block"></div>
+
+
+        <!-- Блок шапки сайта -->
+        <script type="text/template" id="header">
+            <h1>Добро пожаловать! <small>Заходите, пожалуйста</small></h1>
+        </script>
+
+
+        <!-- Блок ввода имени пользователя -->
+        <script type="text/template" id="login">
+            <div class="form-inline">
+                <p class="form-group">
+                    <label for="username">Имя пользователя: </label>
+                        <input class="js-username form-control" type="email" id="username" />
+                    <label for="password">Пароль: </label>
+                        <input class="js-password form-control" type="password" id="password" />
+                    <input type="button" class="btn btn-primary" value="Войти" />
+                </p>
+            </div>
+        </script>
+
+        <!-- Блок ошибки -->
+        <script type="text/template" id="error">
+            <div class="text-danger">
+                <div class="js-user-not-found"></div> Ошибка. Пользователь  <%= username %> не найден, либо введен неверный пароль.
+                <a href="#!/" class="btn btn-danger">Назад</a>
+            </div>
+        </script>
+
+        <!-- Блок удачи -->
+        <script type="text/template" id="content">
+            <div class="text-success">
+                Пользователь <%= username %> успешно авторизован.
+                <a href="#!/" class="btn btn-success">Назад</a>
+            </div>        
+        </script>
+    </body>
+</html>
