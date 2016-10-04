@@ -143,7 +143,8 @@ $(function () {
             if (state == "success") {
                 controller.navigate("!/" + 'content', false);
                 $.getJSON( "access.txt", function( json ) {
-                    if (json.status && json.data && json.data.token) {
+                    if (json && json.status === true && // соглашение с сервером, status = true
+                      json.data && json.data.token) {
                         setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/");
                     }
                 });
@@ -151,7 +152,10 @@ $(function () {
             else {
                 controller.navigate("!/" + state, false);
                 $.getJSON( "error.txt", function( json ) {
-                    alert(json.error.messages[0]);
+                    if (json && json.status === false && // соглашение с сервером, status = false
+                      json.error && json.error.messages && json.error.messages.length) {
+                        alert(json.error.messages[0]);
+                    }
                 });
             }
         }
