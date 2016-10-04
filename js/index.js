@@ -11,8 +11,7 @@ $(function () {
     var AppState = Backbone.Model.extend({
         defaults: {
             username: "",
-            state: "start",
-            error: ""
+            state: "start"
         }
     });
     var appState = new AppState();
@@ -91,10 +90,10 @@ $(function () {
               authorize: function (sendObject, success, error) {
                 // здесь должен быть ajax-запрос на проверку имени-пароля
                 if(Admins.checkUser(sendObject.username, sendObject.password)) {
-                  $.getJSON("https://raw.githubusercontent.com/coulditbemagic/backbone_test/master/access.txt", success);
+                  $.getJSON("access.txt", success);
                 }
                 else {
-                  $.getJSON("https://raw.githubusercontent.com/coulditbemagic/backbone_test/master/error.txt", error);
+                  $.getJSON("error.txt", error);
                 }
               }
             };
@@ -107,30 +106,22 @@ $(function () {
                   json.data && json.data.token) {
                     setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/");
                     appState.set({ // Сохранение имени пользователя и состояния
-                        "state": "success",
-                        "username": username
+                        "state": "success", "username": username
                     });
                 }
                 else {
-                  appState.set({
-                      "state": "error",
-                      "error": "Authorization token problem."
-                  });
+                  console.log("Authorization token problem.");
+                  appState.set({ "state": "error", "username": username });
                 }
             }, function (json) { // error-ответ на авторизацию
                 if (json && json.status === false && // соглашение с сервером, status = false
                   json.error && json.error.messages && json.error.messages.length) {
-                    appState.set({
-                        "state": "error",
-                        "error": json.error.messages[0]
-                    });
+                    console.log(json.error.messages[0]); // нужна локализация?
                 }
                 else {
-                    appState.set({
-                        "state": "error",
-                        "error": "Can't authorize. Unknown error..."
-                    });
+                    console.log("Can't authorize. Unknown error...");
                 }
+                appState.set({ "state": "error", "username": username });
             });
 
         },
