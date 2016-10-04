@@ -114,8 +114,23 @@ $(function () {
         }
     });
 
+    var Footer = Backbone.View.extend({
+        el: $(".page-footer"), // DOM элемент header
+
+        template: _.template($('#footer').html()),
+
+        initialize: function() {
+            this.render();
+        },
+
+        render: function() {
+            this.el.html( this.template() );
+        }
+    });
+
     var header = new Header(); // создадим заголовок страницы
     var block = new Block({ model: appState }); // создадим объект блока авторизации
+    var footer = new Footer(); // создадим футер страницы
 
     appState.trigger("change"); // Вызовем событие change у модели
 
