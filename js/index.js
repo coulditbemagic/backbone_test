@@ -142,7 +142,9 @@ $(function () {
         else {
             if (state == "success") {
                 controller.navigate("!/" + 'content', false);
-                setCookie("foo", "bar", "Mon, 01-Jan-2099 00:00:00 GMT", "/");
+                $.getJSON( "access.txt", function( json ) {
+                    setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/")
+                });
             }
             else {
                 controller.navigate("!/" + state, false);
