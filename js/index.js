@@ -90,7 +90,7 @@ $(function () {
               authorize: function (sendObject, success, error) {
                 // здесь должен быть ajax-запрос на проверку имени-пароля
                 if(Admins.checkUser(sendObject.username, sendObject.password)) {
-                  $.getJSON("access.txt", success);       
+                  $.getJSON("access.txt", success);
                 }
                 else {
                   $.getJSON("error.txt", error);
@@ -112,7 +112,7 @@ $(function () {
                 }
                 else {
                   appState.set({
-                      "state": "error"
+                      "state": "error",
                       "message": "Something's wrong..."
                   });
                 }
