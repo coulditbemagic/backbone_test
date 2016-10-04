@@ -137,13 +137,15 @@ $(function () {
     appState.bind("change:state", function () { // подписка на смену состояния для контроллера
         var state = this.get("state");
         if (state == "start")
-            controller.navigate("!/", false); // false потому, что нам не надо 
+            controller.navigate("!/", false); // false потому, что нам не надо
                                               // вызывать обработчик у Router
         else {
             if (state == "success") {
                 controller.navigate("!/" + 'content', false);
                 $.getJSON( "access.txt", function( json ) {
-                    setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/")
+                    if (json.status && json.data && json.data.token) {
+                        setCookie("foo", json.data.token, "Mon, 01-Jan-2099 00:00:00 GMT", "/");
+                    }
                 });
             }
             else {
@@ -155,8 +157,7 @@ $(function () {
         }
     });
 
-    Backbone.history.start();  // Запускаем HTML5 History push    
+    Backbone.history.start();  // Запускаем HTML5 History push
 
 
 });
-    
