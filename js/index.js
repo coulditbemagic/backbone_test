@@ -11,7 +11,8 @@ $(function () {
     var AppState = Backbone.Model.extend({
         defaults: {
             username: "",
-            state: "start"
+            state: "start",
+            error: ""
         }
     });
     var appState = new AppState();
@@ -90,10 +91,10 @@ $(function () {
               authorize: function (sendObject, success, error) {
                 // здесь должен быть ajax-запрос на проверку имени-пароля
                 if(Admins.checkUser(sendObject.username, sendObject.password)) {
-                  $.getJSON("access.txt", success);
+                  $.getJSON("https://raw.githubusercontent.com/coulditbemagic/backbone_test/master/access.txt", success);
                 }
                 else {
-                  $.getJSON("error.txt", error);
+                  $.getJSON("https://raw.githubusercontent.com/coulditbemagic/backbone_test/master/error.txt", error);
                 }
               }
             };
@@ -113,7 +114,7 @@ $(function () {
                 else {
                   appState.set({
                       "state": "error",
-                      "message": "Something's wrong..."
+                      "error": "Authorization token problem."
                   });
                 }
             }, function (json) { // error-ответ на авторизацию
@@ -121,13 +122,13 @@ $(function () {
                   json.error && json.error.messages && json.error.messages.length) {
                     appState.set({
                         "state": "error",
-                        "message": json.error.messages[0]
+                        "error": json.error.messages[0]
                     });
                 }
                 else {
                     appState.set({
                         "state": "error",
-                        "message": "Can't authorize. Unknown error..."
+                        "error": "Can't authorize. Unknown error..."
                     });
                 }
             });

@@ -52,6 +52,9 @@
         <script type="text/template" id="error">
             <div class="text-danger">
                 <div class="js-user-not-found"></div> Ошибка. Пользователь  <%= username %> не найден, либо введен неверный пароль.
+                <br />
+                <%= error %>
+                <br />
                 <a href="#!/" class="btn btn-danger">Назад</a>
             </div>
         </script>
@@ -61,7 +64,7 @@
             <div class="text-success">
                 Пользователь <%= username %> успешно авторизован.
                 <a href="#!/" class="btn btn-success">Назад</a>
-            </div>        
+            </div>
         </script>
     </body>
 </html>
