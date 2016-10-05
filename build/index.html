@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+    <title></title>
+
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+    <script type="text/javascript" src="libs/libs.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+
+</head>
+<body class="text-center">
+
+
+<div class="page-header"></div>
+<div id="block" class="block"></div>
+<div class="page-footer"></div>
+
+<!-- Блок шапки сайта -->
+<script type="text/template" id="header">
+    <h3>Авторизация</h3>
+</script>
+<!-- Блок ввода имени пользователя -->
+<script type="text/template" id="login">
+    <div class="container">
+        <div class="form-group col-md-offset-4 col-md-4">
+            <input class="js-username form-control" type="email" placeholder="Логин" id="username" required autofocus />
+            <label for="username"></label>
+            <input class="js-password form-control" type="password" placeholder="Пароль" id="password" required />
+            <label for="password"></label><br>
+            <input type="button" class="btn btn-primary" value="Войти" />
+        </div>
+    </div>
+</script>
+<!-- Блок ошибки -->
+<script type="text/template" id="error">
+    <p class="text-danger">
+        Ошибка. Пользователь  <%= username %> не найден, либо введен неверный пароль.
+
+    </p>
+    <p><a href="#!/" class="btn btn-danger">Назад</a></p>
+</script>
+<!-- Блок удачи -->
+<script type="text/template" id="content">
+    <p class="text-success">
+        Пользователь <%= username %> успешно авторизован.
+    </p>
+    <p><a href="#!/" class="btn btn-success">Назад</a></p>
+</script>
+<!-- Блок футера сайта -->
+<script type="text/template" id="footer">
+    <p class="text-primary">Забыли пароль?</p>
+</script>
+</body>
+</html>
