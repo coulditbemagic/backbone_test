@@ -26,11 +26,11 @@ var Block = Backbone.View.extend({
                 if(Admins.checkUser(sendObject.username, sendObject.password)) {
                     // ответ на проверку логина должен приходить авторизационный токен
                     // асинхронность эмулируется запросами к access.txt и error.txt
-                    // вызываем колбеки, они будут вызваны, когда jquery
-                    $.getJSON("access.txt", success);
+                    // вызываем колбеки, они будут вызваны, когда $.getJSON прочитает файл
+                    $.getJSON("server/access.txt", success);
                 }
                 else {
-                    $.getJSON("error.txt", error);
+                    $.getJSON("server/error.txt", error);
                 }
             }
         };
