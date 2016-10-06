@@ -1,4 +1,12 @@
-# backbone_test
-1
+# backbone login form
+**Задание**: реализовать страницу авторизации пользователей используя шаблонизатор **underscore.js** 
 
-developers: coulditbemagic, dhilt
+Во вложении два файла – **error**, **access**.
+
+Пользователь: **test@test.ru pass** – получит сообщение об ошибке.
+
+Пользователь: **admin@admin.ru pass2** – успешно авторизуется, токен запишется в куки, откроется страница – content.
+
+Для вёрстки **bootsrap3**.
+
+Необходимые шаблоны: **footer**, **header**, **logIn**, **content**.
