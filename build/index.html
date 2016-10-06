@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Backbone Login Form...</title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
     <script type="text/javascript" src="libs/libs.js"></script>
     <script type="text/javascript" src="app/index.js"></script>
@@ -26,7 +26,7 @@
             <input class="js-password form-control" type="password" placeholder="Пароль" id="password" required />
             <label for="password"></label>
             <br/>
-            <input type="button" class="btn btn-primary" value="Войти" />
+            <input type="button" class="btn btn-primary" id="btn-login" value="Войти" />
             <input type="button" class="btn btn-primary" disabled="disabled" value="Зарегистрироваться" />
             <br/>
             <p class="text-primary">
@@ -48,7 +48,7 @@
     <p class="text-success">
         Пользователь <%= username %> успешно авторизован.
     </p>
-    <p><a href="#!/" class="btn btn-success">Назад</a></p>
+    <p><input type="button" class="btn btn-success" id="btn-logout" value="Выйти" /></p>
 </script>
 <!-- Блок футера сайта -->
 <script type="text/template" id="footer">
