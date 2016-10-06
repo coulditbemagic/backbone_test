@@ -8,9 +8,9 @@ gulp.task('html', function () {
 });
 
 gulp.task('js', function () {
-    gulp.src('src/js/main.js')
+    gulp.src('src/app/index.js')
         .pipe(rigger())
-        .pipe(gulp.dest('build/js'));
+        .pipe(gulp.dest('build/app'));
 });
 
 gulp.task('libs', function () {
