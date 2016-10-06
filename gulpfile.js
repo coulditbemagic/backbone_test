@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var rigger = require('gulp-rigger');
+var connect = require('gulp-connect');
 
 gulp.task('build-html', function () {
     gulp.src('src/index.html')
@@ -35,4 +36,11 @@ gulp.task('build', function() {
     gulp.run('build-app-js');
     gulp.run('build-libs-js');
     gulp.run('build-server-sources');
+});
+
+gulp.task('server', function() {
+  connect.server({
+    livereload: true,
+    root: ['.', 'build']
+  });
 });
