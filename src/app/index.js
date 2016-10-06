@@ -3,7 +3,7 @@ $(function () {
     //= partials/helpers.js
 
     //= partials/model/objects.js
-    //= partials/router/controller.js
+    //= partials/router/router.js
 
     //= partials/view/content.js
     //= partials/view/header.js
@@ -18,15 +18,10 @@ $(function () {
     appState.bind("change:state", function () { // подписка на смену состояния для контроллера
         var state = this.get("state");
         if (state == "start") {
-            controller.navigate("!/", false); // false потому, что нам не надо
-        }                                     // вызывать обработчик у Router
+            router.navigate("!/", false);
+        }
         else {
-            if (state == "success") {
-                controller.navigate("!/" + 'content', false);
-            }
-            else {
-                controller.navigate("!/" + state, false);
-            }
+            router.navigate("!/" + state, false);
         }
     });
 
