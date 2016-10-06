@@ -8,9 +8,6 @@ $(function () {
             ((secure) ? "; secure" : "");
     }
 
-
-
-
     var AppState = Backbone.Model.extend({
         defaults: {
             username: "",
@@ -64,7 +61,6 @@ $(function () {
     
     var controller = new Controller(); // Создаём контроллер
 
-
     var Block = Backbone.View.extend({
         el: $("#block"), // DOM элемент login-content-error
     
@@ -93,11 +89,11 @@ $(function () {
                     if(Admins.checkUser(sendObject.username, sendObject.password)) {
                         // ответ на проверку логина должен приходить авторизационный токен
                         // асинхронность эмулируется запросами к access.txt и error.txt
-                        // вызываем колбеки, они будут вызваны, когда jquery
-                        $.getJSON("access.txt", success);
+                        // вызываем колбеки, они будут вызваны, когда $.getJSON прочитает файл
+                        $.getJSON("server/access.txt", success);
                     }
                     else {
-                        $.getJSON("error.txt", error);
+                        $.getJSON("server/error.txt", error);
                     }
                 }
             };
@@ -163,10 +159,6 @@ $(function () {
         }
     });
 
-
-
-
-
     var header = new Header(); // создадим заголовок страницы
     var block = new Block({ model: appState }); // создадим объект блока авторизации
     var footer = new Footer(); // создадим футер страницы
@@ -175,9 +167,9 @@ $(function () {
 
     appState.bind("change:state", function () { // подписка на смену состояния для контроллера
         var state = this.get("state");
-        if (state == "start")
+        if (state == "start") {
             controller.navigate("!/", false); // false потому, что нам не надо
-                                              // вызывать обработчик у Router
+        }                                     // вызывать обработчик у Router
         else {
             if (state == "success") {
                 controller.navigate("!/" + 'content', false);
@@ -189,6 +181,5 @@ $(function () {
     });
 
     Backbone.history.start();  // Запускаем HTML5 History push
-
 
 });

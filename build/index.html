@@ -1,19 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-
-
     <title></title>
-
-
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
     <script type="text/javascript" src="libs/libs.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-
-
+    <script type="text/javascript" src="app/index.js"></script>
+    <meta charset="utf-8" />
 </head>
 <body class="text-center">
-
 
 <div class="page-header"></div>
 <div id="block" class="block"></div>
@@ -30,8 +24,14 @@
             <input class="js-username form-control" type="email" placeholder="Логин" id="username" required autofocus />
             <label for="username"></label>
             <input class="js-password form-control" type="password" placeholder="Пароль" id="password" required />
-            <label for="password"></label><br>
+            <label for="password"></label>
+            <br/>
             <input type="button" class="btn btn-primary" value="Войти" />
+            <input type="button" class="btn btn-primary" disabled="disabled" value="Зарегистрироваться" />
+            <br/>
+            <p class="text-primary">
+              <a href="">Забыли пароль?</a>
+            </p>
         </div>
     </div>
 </script>
@@ -52,7 +52,8 @@
 </script>
 <!-- Блок футера сайта -->
 <script type="text/template" id="footer">
-    <p class="text-primary">Забыли пароль?</p>
+    <hr />
 </script>
+
 </body>
 </html>
