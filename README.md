@@ -16,14 +16,10 @@
 
 ## Установка и запуск
 
-Ставим gulp
-npm install -g gulp
+1. Ставим gulp: npm install -g gulp
 
-Ставим npm зависимости
-npm install
+2. Ставим npm зависимости: npm install
 
-Собираем проект
-gulp build
+3. Собираем проект: gulp build
 
-Запускаем в браузере
-./build/index.html
+4. Запускаем в браузере: ./build/index.html
