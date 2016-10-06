@@ -1,7 +1,8 @@
 var AppState = Backbone.Model.extend({
     defaults: {
-        username: "",
-        state: "start"
+        isAuthorized: null,
+        username: null,
+        state: null
     }
 });
 var appState = new AppState();
