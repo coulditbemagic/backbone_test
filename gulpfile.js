@@ -18,3 +18,9 @@ gulp.task('libs', function () {
         .pipe(rigger())
         .pipe(gulp.dest('build/libs'));
 });
+
+gulp.task('build', function() {
+    gulp.run('html');
+    gulp.run('js');
+    gulp.run('libs');
+});
