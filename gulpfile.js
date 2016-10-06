@@ -7,6 +7,11 @@ gulp.task('build-html', function () {
         .pipe(gulp.dest('build'));
 });
 
+gulp.task('build-css', function () {
+    gulp.src('src/css/bootstrap.css')
+        .pipe(gulp.dest('build/css'));
+});
+
 gulp.task('build-app-js', function () {
     gulp.src('src/app/index.js')
         .pipe(rigger())
@@ -26,6 +31,7 @@ gulp.task('build-server-sources', function () {
 
 gulp.task('build', function() {
     gulp.run('build-html');
+    gulp.run('build-css');
     gulp.run('build-app-js');
     gulp.run('build-libs-js');
     gulp.run('build-server-sources');
