@@ -24,4 +24,6 @@
 
 4. Запускаем сервер: gulp server
 
-4. Запускаем в браузере: http://localhost:8080/
+4.1. Запускаем сервер с liveroload: gulp run
+
+5. Запускаем в браузере: http://localhost:8080/

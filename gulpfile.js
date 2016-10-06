@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var rigger = require('gulp-rigger');
 var connect = require('gulp-connect');
+var watch = require('gulp-watch');
 
 gulp.task('build-html', function () {
     gulp.src('src/index.html')
@@ -44,3 +45,22 @@ gulp.task('server', function() {
     root: ['.', 'build']
   });
 });
+
+gulp.task('livereload', function() {
+  gulp.src(['build/app/index.js', 'build/index.html'])
+    .pipe(watch('build/**/*.*'))
+    .pipe(connect.reload());
+});
+
+gulp.task('watch', function() {
+
+  watch(['src/index.html', 'src/templates/**/*.html'], function () {
+    gulp.run('build-html');
+  });
+
+  watch('src/app/**/*.js', function () {
+    gulp.run('build-app-js');
+  });
+})
+
+gulp.task('run', ['build', 'server', 'livereload', 'watch']);
