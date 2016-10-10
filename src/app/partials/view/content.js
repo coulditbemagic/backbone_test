@@ -1,4 +1,4 @@
-var Block = Backbone.View.extend({
+var Content = Backbone.View.extend({
   el: $('#block'), // DOM элемент login-content-error
 
   templates: { // Шаблоны на разное состояние
@@ -9,18 +9,13 @@ var Block = Backbone.View.extend({
 
   events: {
     'keydown': 'keyAction',
-    'click #btn-login': 'login', // Обработчик клика на кнопке 'Войти'
-    'click #btn-logout': 'logout' // Обработчик клика на кнопке 'Выйти'
+    'click #btn-login': 'login',
+    'click #btn-logout': 'logout'
   },
 
   initialize: function () { // Подписка на изменения модели
-    this.model.bind('change:isAuthorized', this.render, this);
+    // this.model.bind('change:isAuthorized', this.render, this);
     this.model.bind('change:state', this.render, this);
-  },
-
-  logout: function () {
-    deleteCookie('token');
-    appState.set({ 'state': 'start', 'username': null, 'isAuthorized': false });
   },
 
   login: function () {
@@ -31,6 +26,8 @@ var Block = Backbone.View.extend({
     appState.set({'username': username_text});
 
     if (appState.isValid()) { // Валидация имени пользователя
+
+
       serverMock.authorize({
         'username': username_text,
         'password': password_text
@@ -59,22 +56,36 @@ var Block = Backbone.View.extend({
         appState.set({'state': 'error'});
 
       });
+
     } else {
       username.parent().addClass('has-error').find('.js-username-error').show()
     }
 
   },
 
+  logout: function () {
+    deleteCookie('token');
+    appState.set({ 'state': 'start', 'username': null, 'isAuthorized': false });
+    $(this.el).html(this.templates[appState.get('state')](this.model.toJSON()));
+  },
+
   render: function () {
-    var state = this.model.get('state');
-    // проверка на защищенное авторизацией состояние
-    if (state == 'success' && !this.model.get('isAuthorized')) {
-      appState.set({ 'state': 'start' }); // сбрасываем состояние при несанкционированном доступе
-      router.navigate("", true);
-      Backbone.history.loadUrl();
-      return this; // мы все равно вернемся в render(), поскольку сработает binding строкой выше
-    }
-    $(this.el).html(this.templates[state](this.model.toJSON()));
+    $(this.el).html(this.templates[appState.get('state')](this.model.toJSON()));
+    return this;
+  },
+
+  renderStart: function () {
+    $(this.el).html(this.templates['start'](this.model.toJSON()));
+    return this;
+  },
+
+  renderSuccess: function () {
+    $(this.el).html(this.templates['success'](this.model.toJSON()));
+    return this;
+  },
+
+  renderError: function () {
+    $(this.el).html(this.templates['error'](this.model.toJSON()));
     return this;
   },
 
