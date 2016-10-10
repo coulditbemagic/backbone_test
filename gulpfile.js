@@ -9,9 +9,6 @@ gulp.task('build-html', function () {
     gulp.src('src/index.html')
         .pipe(rigger())
         .pipe(gulp.dest('build'));
-    gulp.src('src/content/index.html')
-        .pipe(rigger())
-        .pipe(gulp.dest('build/content'));
 });
 
 gulp.task('build-css', function () {
