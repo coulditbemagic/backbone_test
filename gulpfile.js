@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var rigger = require('gulp-rigger');
 var connect = require('gulp-connect');
 var watch = require('gulp-watch');
+var sass = require('gulp-sass');
+var cssmin = require('gulp-minify-css');
 
 gulp.task('build-html', function () {
     gulp.src('src/index.html')
@@ -13,7 +15,9 @@ gulp.task('build-html', function () {
 });
 
 gulp.task('build-css', function () {
-    gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+    gulp.src('src/styles/app.scss')
+        .pipe(sass())
+        .pipe(cssmin())
         .pipe(gulp.dest('build/css'));
 });
 
@@ -56,9 +60,12 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('watch', function() {
-
   watch(['src/index.html', 'src/templates/**/*.html'], function () {
     gulp.run('build-html');
+  });
+
+  watch('src/styles/app.scss', function () {
+    gulp.run('build-css');
   });
 
   watch('src/app/**/*.js', function () {
