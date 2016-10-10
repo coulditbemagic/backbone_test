@@ -1,18 +1,26 @@
 <!-- Блок ввода имени пользователя -->
 <script type="text/template" id="login">
-    <div class="container">
-        <div class="form-group col-md-offset-4 col-md-4">
-            <input class="js-username form-control" type="email" placeholder="Логин" id="username" required autofocus />
-            <label for="username"></label>
-            <input class="js-password form-control" type="password" placeholder="Пароль" id="password" required />
-            <label for="password"></label>
-            <br/>
-            <input type="button" class="btn btn-primary" value="Войти" />
-            <input type="button" class="btn btn-primary" disabled="disabled" value="Зарегистрироваться" />
-            <br/>
-            <p class="text-primary">
-              <a href="">Забыли пароль?</a>
-            </p>
+    <div class="col-sm-offset-3 col-sm-6 col-lg-offset-4 col-lg-4">
+
+        <div class="col-sm-12">
+            <input class="js-username form-control" type="email" id="username" placeholder="Логин" required autofocus />
+            <div class="js-username-error text-danger text-left" style="display: none;">Логин должен содержать @, например, test@test.ru</div>
+            <label for="username" class=""></label>
         </div>
+
+        <div class="col-sm-12">
+            <input class="js-password form-control" type="password" id="password" placeholder="Пароль" />
+            <label for="password" class=""></label>
+        </div>
+
+        <p>
+            <input type="button" class="btn btn-primary" id="btn-login" value="Войти" />
+            <input type="button" class="btn btn-primary" disabled="disabled" value="Зарегистрироваться" />
+        </p>
+
+        <p class="text-primary">
+          <a href="">Забыли пароль?</a>
+        </p>
+
     </div>
 </script>

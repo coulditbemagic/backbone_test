@@ -1,9 +1,18 @@
 var AppState = Backbone.Model.extend({
+    validate: function(attrs){
+        if ((attrs.username).indexOf('@') < 0) {
+            console.log('INVALID_LOGIN');
+            return this
+        }
+    },
     defaults: {
-        username: "",
-        state: "start"
+        isAuthorized: null,
+        username: null,
+        state: null
     }
+
 });
+
 var appState = new AppState();
 
 var UserNameModel = Backbone.Model.extend({ // Модель пользователя
@@ -26,5 +35,5 @@ var AdminsCollection = Backbone.Collection.extend({ // Коллекция пол
 
 var Admins = new AdminsCollection([ // Админы, которым показываем контент
     { Name: "admin@admin.ru", Password: "pass2" },
-    { Name: "admin", Password: "pass2" }
+    { Name: "@", Password: "" }
 ]);

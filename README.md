@@ -16,10 +16,14 @@
 
 ## Установка и запуск
 
-1. Ставим gulp: npm install -g gulp
+1. Ставим gulp: **npm install -g gulp**
 
-2. Ставим npm зависимости: npm install
+2. Ставим npm зависимости: **npm install**
 
-3. Собираем проект: gulp build
+3. Собираем проект: **gulp build**
 
-4. Запускаем в браузере: ./build/index.html
+4. Запускаем сервер: **gulp server**
+
+5. (альтернатива п.4) Запускаем сервер с liveroload: **gulp run**
+
+6. Запускаем в браузере: **http://localhost:8080/**
