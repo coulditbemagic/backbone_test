@@ -46,7 +46,8 @@ gulp.task('build', function() {
 gulp.task('server', function() {
   connect.server({
     livereload: true,
-    root: ['.', 'build']
+    root: ['.', 'build'],
+    fallback: 'build/index.html'
   });
 });
 
