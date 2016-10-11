@@ -11,3 +11,5 @@ var Header = Backbone.View.extend({
         $(this.el).html( this.template() );
     }
 });
+
+var header = new Header();

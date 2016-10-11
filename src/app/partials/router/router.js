@@ -1,52 +1,34 @@
-// Пробуем авторизоваться по куки
-function isToken() {
-
-    var token = getCookie("token");
-    var login = false;
-
-    serverMock.verifyToken(token, function () {
-        // appState.set({ "isAuthorized": true, "state": "success" });
-        login = true
-    }, function () {
-        // appState.set({ "isAuthorized": false, 'state': 'start' });
-        login = false
-    });
-
-    return login
-}
-
 var Router = Backbone.Router.extend({
-    routes: {
-        "": "start", // Начальная страница, форма логина
-        "content": "start", // Защищенный авторизацией контент
-        "content/": "success", // Защищенный авторизацией контент
-        "error": "error" // Блок ошибки авторизации
-    },
+  routes: {
+    '': 'start', // Начальная страница, форма логина
+    'content': 'success', // Защищенный авторизацией контент
+    'error': 'error', // Блок ошибки авторизации
+    '*path' : 'redirect' // Все остальные пути будут вести на 'start'
+  },
 
-    start: function () {
-        var content = new Content({ model: appState });
-        if(isToken()) {
-            content.renderSuccess()
-        } else {
-            content.renderStart()
-        }
-    },
+  redirect: function () {
+    router.navigate('', {trigger: true, replace: true});
+  },
 
-    success: function () {
-        var content = new Content({ model: appState });
-        if(isToken()) {
-            content.renderSuccess()
-        } else {
-            content.renderStart();
-            router.navigate("", false);
-        }
-    },
-
-    error: function () {
-        var block = new Error({ model: appState });
+  start: function () {
+    if(appState.get('isAuthorized')) {
+      appState.set('state', 'success');
+      return;
     }
+    content.render('start');
+  },
+
+  success: function () {
+    if(!appState.get('isAuthorized')) {
+      appState.set('state', 'start');
+      return;
+    }
+    content.render('success')
+  },
+
+  error: function () {
+    content.render('error');
+  }
 });
 
 var router = new Router();
-
-Backbone.history.start({pushState: true, root: '/' });  // Запускаем HTML5 History push

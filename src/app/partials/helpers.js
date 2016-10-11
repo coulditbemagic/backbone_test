@@ -16,15 +16,6 @@ function deleteCookie (name) {
   document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-appState.bind("change:state", function () { // подписка на смену состояния для контроллера
-  var state = this.get("state");
-  if (state == "start") {
-    router.navigate("", true);
-  }
-  else {
-    router.navigate(((state == 'error') ? 'error' : 'content'), true);
-  }
-});
 
 var serverMock = {
 
