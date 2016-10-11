@@ -24,6 +24,17 @@ $(function () {
   function runApp (isAuthorized) {
     appState.set({ 'isAuthorized': isAuthorized });
     Backbone.history.start({pushState: true, root: '/' });  // Запуск HTML5 History push
+    var route = Backbone.history.fragment, state;
+    if (route == 'content') {
+      state = 'success';
+    }
+    else if (route == 'error') {
+      state = 'error';
+    }
+    else {
+      state = 'start';
+    }
+    appState.set({ state: state });
   }
 
   // Пробуем авторизоваться по куки

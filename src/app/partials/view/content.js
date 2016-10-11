@@ -75,8 +75,17 @@ var Content = Backbone.View.extend({
 
   keyAction: function (e) {
     var code = e.keyCode || e.which;
-    if(code == 13) {
-      this.login();
+    if (code == 13) {
+      var state = appState.get('state');
+      if (state == 'start') {
+        this.login();
+      }
+      else if (state == 'success') {
+        this.logout();
+      }
+      else if (state == 'error') {
+        this.back();
+      }
     }
   }
 
